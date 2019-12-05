@@ -1,0 +1,16 @@
+---
+- name: Preparation Playbook
+  hosts: nodes
+  gather_facts: no
+  tasks:
+  - name: Insert Key
+    lineinfile:
+      path: "/home/jboss/.ssh/authorized_keys"
+      line: "{{ pubkey }}"
+      create: yes
+  - name: Set authorized key taken from file
+    authorized_key:
+      user: jboss
+      state: present
+      key: "{{ lookup('file', '/home/jboss/.ssh/id_rsa.pub') }}"
+

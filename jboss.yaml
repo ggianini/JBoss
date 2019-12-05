@@ -1,0 +1,137 @@
+--- 
+- name: Playbook JBoss 4
+  hosts: nodes
+  tasks:
+    - name: Guarantee that "jboss_4.sh" file does not exist
+      file:
+        path: /tmp/jboss_4.sh
+        state: absent
+      register: absentfile
+    - name: Print output
+      debug:
+        msg: "{{ absentfile.state }}"
+    - name: Create File with command for JBoss 4.x
+      file:
+        path: /tmp/jboss_4.sh
+        state: touch
+        mode: '0777'
+    - name: Show Command for JBoss 4.x
+      debug:
+        msg: "{{ jboss_4 }}"
+    - name: Copy Content from from var to file
+      copy:
+        content: "{{ jboss_4 }}"
+        dest: /tmp/jboss_4.sh
+    - name: Run Script to Check JBoss Version 4.x
+      script: /tmp/jboss_4.sh
+      register: JBoss_Version_4
+    - name: Show Output of JBoss Version 4.x and number of cores
+      debug:
+        msg: "The JBoss Version: {{ JBoss_Version_4.stdout }} is running with {{ ansible_processor_vcpus }} vCPUs"
+      when: 'JBoss_Version_4.stdout.startswith("4")'
+    - name: Delete Script for JBoss 4.x
+      file:
+        path: /tmp/jboss_4.sh
+        state: absent
+- name: Playbook JBoss 5
+  hosts: nodes
+  tasks:
+    - name: Guarantee that "jboss_5.sh" file does not exist
+      file:
+        path: /tmp/jboss_5.sh
+        state: absent
+      register: absentfile
+    - name: Print output
+      debug:
+        msg: "{{ absentfile.state }}"
+    - name: Create File with command for JBoss 5.x
+      file:
+        path: /tmp/jboss_5.sh
+        state: touch
+        mode: '0777'
+    - name: Show Command for JBoss 5.x
+      debug:
+        msg: "{{ jboss_5 }}"
+    - name: Copy Content from from var to file
+      copy:
+        content: "{{ jboss_5 }}"
+        dest: /tmp/jboss_5.sh
+    - name: Run Script to Check JBoss Version 5.x
+      script: /tmp/jboss_5.sh
+      register: JBoss_Version_5
+    - name: Show Output of JBoss Version 5.x
+      debug:
+        msg: "The JBoss Version: {{ JBoss_Version_5.stdout }} is running with {{ ansible_processor_vcpus }} vCPUs"
+      when: 'JBoss_Version_5.stdout.startswith("5")'
+    - name: Delete Script for JBoss 5.x
+      file:
+        path: /tmp/jboss_5.sh
+        state: absent
+- name: Playbook JBoss 6
+  hosts: nodes
+  tasks:
+    - name: Guarantee that "jboss_6.sh" file does not exist
+      file:
+        path: /tmp/jboss_6.sh
+        state: absent
+      register: absentfile
+    - name: Print output
+      debug:
+        msg: "{{ absentfile.state }}"
+    - name: Create File with command for JBoss 6.x
+      file:
+        path: /tmp/jboss_6.sh
+        state: touch
+        mode: '0777'
+    - name: Show Command for JBoss 6.x
+      debug:
+        msg: "{{ jboss_6 }}"
+    - name: Copy Content from from var to file
+      copy:
+        content: "{{ jboss_6 }}"
+        dest: /tmp/jboss_6.sh
+    - name: Run Script to Check JBoss Version 6.x
+      script: /tmp/jboss_6.sh
+      register: JBoss_Version_6
+    - name: Show Output of JBoss Version 6.x
+      debug:
+        msg: "The JBoss Version: {{ JBoss_Version_6.stdout }} is running with {{ ansible_processor_vcpus }} vCPUs"
+      when: 'JBoss_Version_6.stdout.startswith("6")'
+    - name: Delete Script for JBoss 6.x
+      file:
+        path: /tmp/jboss_6.sh
+        state: absent
+- name: Playbook JBoss 7
+  hosts: nodes
+  tasks:
+    - name: Guarantee that "jboss_7.sh" file does not exist
+      file:
+        path: /tmp/jboss_7.sh
+        state: absent
+      register: absentfile
+    - name: Print output
+      debug:
+        msg: "{{ absentfile.state }}"
+    - name: Create File with command for JBoss 7.x
+      file:
+        path: /tmp/jboss_7.sh
+        state: touch
+        mode: '0777'
+    - name: Show Command for JBoss 7.x
+      debug:
+        msg: "{{ jboss_7 }}"
+    - name: Copy Content from from var to file
+      copy:
+        content: "{{ jboss_7 }}"
+        dest: /tmp/jboss_7.sh
+    - name: Run Script to Check JBoss Version 7.x
+      script: /tmp/jboss_7.sh
+      register: JBoss_Version_7
+    - name: Show Output of JBoss Version 7.x
+      debug:
+        msg: "The JBoss Version: {{ JBoss_Version_7.stdout }} is running with {{ ansible_processor_vcpus }} vCPUs"
+      when: 'JBoss_Version_7.stdout.startswith("7")'
+    - name: Delete Script for JBoss 7.x
+      file:
+        path: /tmp/jboss_7.sh
+        state: absent
